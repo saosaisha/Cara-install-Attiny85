@@ -1,0 +1,41 @@
+
+1. Pertama-tama, buka aplikasi Arduino IDE di komputermu. Pada aplikasi Arduino, pilih menu File ... Preferences.
+
+Akan muncul jendela Preferences.
+Pada kolom dengan label "Additional Boards Manager URLs"
+isikan teks berikut:
+http://digistump.com/package_digistump_index.json
+Apabila kolom tersebut sudah berisi teks, maka masukkan URL di atas melalui ikon jendela yang ada di sebelah kanan kolom lalu masukkan URL tersebut pada baris baru. Sehingga tampilannya sekarang menjadi seperti ini. Klik OK.
+2. Pilih menu Tools, pilih submenu Board, dan pilih menu Boards Manager..
+Akan muncul jendela Boards Manager. Pada dropdown Type pilih opsi Contributed, maka list boards manager di bawahnya hanya akan memunculkan board bertipe contributed saja.
+Klik "Digistump AVR Board" lalu klik tombol install yang ada di sebelah kanan bawahnya. Arduino IDE akan mengunduh file-file yang diperlukan untuk Digispark. (Untuk ini komputermu perlu terkoneksi dengan internet).
+
+Setelah proses instalasi board manager selesai, akan muncul label bertuliskan INSTALLED pada list board manager digistump tersebut.
+Khusus pengguna sistem operasi Windows, setelah proses instalasi board manager selesai, akan muncul popup untuk menginstal driver untuk board Digistump. Apabila Kamu menggunakan Windows 8.1 keatas, ada kemungkinan jendela instalasi driver tidak muncul karena masalah izin akses. Untuk itu kamu harus menjalankannya secara manual. Pada Windows Explorer buka folder C:\Users[nama-user]\AppData\Local \Arduino15\packages\digistump\tools\micronucleus\2.0a4 (ganti nama-user dengan user aktif di komputermu. Selain itu folder dengan nama berformat versi boleh jadi berbeda dengan yang saya punya. Sesuaikan dengan yang ada di komputermu) lalu pilih file post_install.bat. Klik kanan file tersebut lalu pilih Run as Administrator. File tersebut akan menjalankan wizard instalasi. Ikuti langkah-langkah instalasinya hingga selesai.
+
+3. Setelah semua proses instalasi selesai, mestinya pada menu Tools > Board sudah tersedia menu board Digispark (Default - 16.5mhz). Pilih board tersebut.
+
+4. Lalu pada menu Tools > Programmer pilih Micronucleus.
+Untuk mengetes apakah Digisparkmu sudah bisa diprogram menggunakan Arduino IDE, copas program berikut:
+// the setup routine runs once when you press reset:
+void setup() {                
+  // initialize the digital pin as an output.
+  pinMode(0, OUTPUT); //LED on Model B
+  pinMode(1, OUTPUT); //LED on Model A   
+}
+
+// the loop routine runs over and over again forever:
+void loop() {
+  digitalWrite(0, HIGH);   // turn the LED on (HIGH is the voltage level)
+  digitalWrite(1, HIGH);
+  delay(1000);               // wait for a second
+  digitalWrite(0, LOW);    // turn the LED off by making the voltage LOW
+  digitalWrite(1, LOW); 
+  delay(1000);               // wait for a second
+}
+Program di atas akan menyalakan dan mematikan LED yang ada pada board Digisparkmu dengan interval waktu 1 detik.
+Klik tombol Upload yang ada di sebelah kanan atas aplikasi.
+
+PERHATIKAN bahwa berbeda dengan board Arduino lainnya, board Digispark dihubungkan ke port USB setelah kita menekan tombol Upload dan muncul pesan "Running Digispark Uploader... Plug in device now... (will timeout in 60 seconds)".
+Jadi jangan dulu mencolokkan Digispark ke port USB sebelum menekan tombol Upload.
+Apabila sudah muncul pesan ">> Micronucleus done. Thank you!" pada kolom debugging, berarti program Kamu sudah tersimpan ke dalam mikrokontroller dan mestinya LED pada board Digisparkmu sudah berkedip artinya OK.
